@@ -1,5 +1,7 @@
 package taboo
 
+import "runtime"
+
 type handler struct {
 	try     func()
 	catch   func(e *Exception)
@@ -30,10 +32,10 @@ func (h *handler) Do() {
 	if h.catch != nil {
 		defer func() {
 			if r := recover(); r != nil {
-				if e, ok := r.(*Exception); ok {
-					h.catch(e)
-				} else {
-					h.catch(fromPanic(r.(error)))
+				switch e := r.(type) {
+				case *Exception: h.catch(e)
+				case runtime.Error: h.catch(fromError(e))
+				case interface{}: h.catch(fromInterface(e))
 				}
 			}
 		}()
