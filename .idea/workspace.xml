@@ -82,8 +82,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.taboo" />
       <item itemvalue="Go Build.go build github.com/anon-org/taboo/cmd" />
+      <item itemvalue="Go Build.taboo" />
     </list>
     <recent_temporary>
       <list>

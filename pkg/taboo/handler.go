@@ -33,9 +33,12 @@ func (h *handler) Do() {
 		defer func() {
 			if r := recover(); r != nil {
 				switch e := r.(type) {
-				case *Exception: h.catch(e)
-				case runtime.Error: h.catch(fromError(e))
-				case interface{}: h.catch(fromInterface(e))
+				case *Exception:
+					h.catch(e)
+				case runtime.Error:
+					h.catch(fromError(e))
+				case interface{}:
+					h.catch(fromInterface(e))
 				}
 			}
 		}()
