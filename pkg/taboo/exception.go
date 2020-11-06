@@ -21,9 +21,15 @@ func fromThrow(err error) *Exception {
 }
 
 func fromError(err error) *Exception {
+	var caller *caller
+	if err.Error() == "runtime error: invalid memory address or nil pointer dereference" {
+		caller = call(6)
+	} else {
+		caller = call(5)
+	}
 	return &Exception{
 		message: err,
-		caller:  call(5),
+		caller:  caller,
 		cause:   nil,
 	}
 }
